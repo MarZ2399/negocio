@@ -370,19 +370,19 @@
                 <div class="contact-form">
                     <form id="contactForm">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Nombre completo" required>
+                            <input type="text" name="user_name" id="user_name" placeholder="Nombre completo" required>
                         </div>
                         
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                            <input type="email" name="user_email" id="user_email" placeholder="Correo electrónico" required>
                         </div>
                         
                         <div class="form-group">
-                            <input type="tel" id="phone" name="phone" placeholder="Teléfono (opcional)">
+                            <input type="tel" name="user_phone" id="user_phone" placeholder="Teléfono (opcional)">
                         </div>
                         
                         <div class="form-group">
-                            <select id="service" name="service" required>
+                            <select name="user_service" id="user_service" required>
                                 <option value="" disabled selected>Selecciona un servicio</option>
                                 <option value="web">Desarrollo Web</option>
                                 <option value="mobile">Apps Móviles</option>
@@ -393,7 +393,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <textarea id="message" name="message" rows="5" placeholder="Cuéntanos sobre tu proyecto" required></textarea>
+                            <textarea name="message" id="message" rows="5" placeholder="Cuéntanos sobre tu proyecto" required></textarea>
                         </div>
                         
                         <button type="submit" class="form-button">Enviar mensaje</button>
@@ -462,5 +462,24 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("Bmzay8hoboIxCoCJu"); // 👉 Reemplaza con tu User ID de EmailJS
+    })();
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm('service_oz99y2i', 'template_tq4k2l8', this) // 👉 Reemplaza con tus IDs reales
+        .then(function() {
+          alert("¡Correo enviado correctamente!");
+          document.getElementById('formulario-servicio').reset();
+        }, function(error) {
+          alert("Error al enviar. Intenta nuevamente.");
+          console.log('FAILED...', error);
+        });
+    });
+  </script>
 </body>
 </html>
